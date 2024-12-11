@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/template.xhtml">
+    <ui:define name="title">
+        Listado de Proyectos - Ejercicio 3
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="form">
+            <p:dataTable id="dataTable" value="#{ejercicio3.proyectos}" var="proyecto" paginator="true" rows="10" 
+                         sortMode="multiple" style="margin-top:20px;">
+
+                <p:column headerText="Código del Proyecto" sortBy="#{proyecto.codigo}">
+                    <h:outputText value="#{proyecto.codigo}" />
+                </p:column>
+                <p:column headerText="Nombre del Proyecto" sortBy="#{proyecto.titulo}">
+                    <h:outputText value="#{proyecto.titulo}" />
+                </p:column>
+                <p:column headerText="Año" sortBy="#{proyecto.anyo}">
+                    <h:outputText value="#{proyecto.anyo}" />
+                </p:column>
+                <p:column headerText="CRS's">
+                    <h:outputText value="#{ejercicio3.getCrsInfo(proyecto)}" />
+                </p:column>
+                <p:column headerText="ODS's">
+                    <h:outputText value="#{ejercicio3.getOdsInfo(proyecto)}" />
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

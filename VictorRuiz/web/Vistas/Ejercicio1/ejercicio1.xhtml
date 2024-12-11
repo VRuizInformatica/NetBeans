@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="/template.xhtml">
+    <ui:define name="title">
+        Filtrado de Proyectos - Ejercicio 1
+    </ui:define>
+    <ui:define name="body">
+        <h:form id="formFiltro">
+            <p:panel header="Filtros de Búsqueda">
+                <p:messages id="messages" />
+                <p:panelGrid columns="4" columnClasses="label,value,label,value">
+                    <h:outputLabel for="year" value="Año:" />
+                    <p:inputText id="year" value="#{ejercicio1.yearFilter}" size="4" maxlength="4" />
+                    <h:outputLabel for="country" value="País:" />
+                    <p:selectOneMenu id="country" value="#{ejercicio1.countryFilter}">
+                        <f:selectItem itemLabel="Seleccione un país" itemValue="" />
+                        <f:selectItems value="#{ejercicio1.listaPaises}" var="pais" itemValue="#{pais}" itemLabel="#{pais}" />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <p:commandButton value="Filtrar" action="#{ejercicio1.filtrarProyectos}" update="dataTable messages" icon="ui-icon-search" />
+                <p:commandButton value="Resetear" action="#{ejercicio1.resetearFiltros}" update="dataTable messages" icon="ui-icon-refresh" />
+            </p:panel>
+
+            <p:dataTable id="dataTable" value="#{ejercicio1.proyectosFiltrados}" var="proyecto" paginator="true" rows="10" style="margin-top:20px;">
+                <p:column headerText="Código">
+                    <h:outputText value="#{proyecto.codProyecto}" />
+                </p:column>
+                <p:column headerText="Título">
+                    <h:outputText value="#{proyecto.titulo}" />
+                </p:column>
+                <p:column headerText="Año">
+                    <h:outputText value="#{proyecto.anyo}" />
+                </p:column>
+                <p:column headerText="País">
+                    <h:outputText value="#{proyecto.pais}" />
+                </p:column>
+                <!-- Puedes agregar más columnas si lo deseas -->
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
+</html>

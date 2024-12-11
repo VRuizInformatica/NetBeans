@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTipoorganismosTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTipoorganismosEmpty}" rendered="#{tipoorganismosController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tipoorganismosController.items.rowCount > 0}">
+                    <h:outputText value="#{tipoorganismosController.pagination.pageFirstItem + 1}..#{tipoorganismosController.pagination.pageLastItem + 1}/#{tipoorganismosController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tipoorganismosController.previous}" value="#{bundle.Previous} #{tipoorganismosController.pagination.pageSize}" rendered="#{tipoorganismosController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tipoorganismosController.next}" value="#{bundle.Next} #{tipoorganismosController.pagination.pageSize}" rendered="#{tipoorganismosController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tipoorganismosController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipoorganismosTitle_codTipo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codTipo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipoorganismosTitle_nomTipo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nomTipo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tipoorganismosController.prepareView}" value="#{bundle.ListTipoorganismosViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tipoorganismosController.prepareEdit}" value="#{bundle.ListTipoorganismosEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tipoorganismosController.destroy}" value="#{bundle.ListTipoorganismosDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tipoorganismosController.prepareCreate}" value="#{bundle.ListTipoorganismosCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTipoorganismosIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
